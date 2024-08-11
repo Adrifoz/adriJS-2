@@ -5,11 +5,11 @@
 // ASSETS
 
 const productos = [
-{nombre: "Caño de agua termofusión", precio: 2000},
-{nombre: "Caño de gas termofusión", precio: 4000},
-{nombre: "Caño epoxi", precio: 1500},
-{nombre: "Caño corrugado", precio: 800},
-{nombre: "Manguera", precio: 500},
+{nombre: "Caño de agua termofusión", precio: 2000, cantidad: 0},
+{nombre: "Caño de gas termofusión", precio: 4000, cantidad: 0},
+{nombre: "Caño epoxi", precio: 1500, cantidad: 0},
+{nombre: "Caño corrugado", precio: 800, cantidad: 0},
+{nombre: "Manguera", precio: 500, cantidad: 0},
 ]
 
 const productsCart = [];
@@ -135,13 +135,33 @@ function buy (nombre, precio) {
  
   // let cantidad = 0;
   // let totalProducto = precio * cantidad;
+  let index = productos.nombre.indexOf(`'${nombre}'`) //RESOLVER indexOf
+  let productBuyed = productos[index];
 
+() => {let askIncludes = productsCart.nombre.includes(nombre)
+  if(!askIncludes) {
+productsCart.push(product)
+  }else if (askIncludes){
+    productBuyed.cantidad = cantidad++
+  }else{
+    shopping.innerHTML = `<h3>ERROR</h3>`;
+  }
+
+class product {
+  constructor(nombre, precio) {
+    this.nombre = nombre;
+    this.precio = precio;
+    this.cantidad = 1;
+  }
+}}
 
 
 const tituloProducto = document.createElement('div');
 tituloProducto.innerHTML = `<h3> ${nombre}</h3>
-<h4> ${precio}</h4>`;         // 
+<h4> ${precio}</h4>`;
+         // 
 productoCart.appendChild(tituloProducto);
+console.log(productsCart)
 }
 
 
