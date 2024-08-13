@@ -14,6 +14,8 @@ const productos = [
 
 const productsCart = [];
 
+const argumentsArray = [{}];
+
 ////////////////////////////////////////////////////
 
 
@@ -68,6 +70,7 @@ cart.appendChild(productoCart);
 function button () {
   const button = document.createElement('button');
   button.addEventListener("click", pregunta, false);
+  chargeArguments();
   button.innerHTML = "Catálogo";
   button.className = "productos";
   container.appendChild(button);
@@ -83,11 +86,18 @@ function button () {
 
 function buttonProduct (articulo, nombre, precio) {
   const buttonProduct = document.createElement('button');
-  buttonProduct.addEventListener("click", () => buy(nombre, precio), false);
+  buttonProduct.addEventListener("click", buy(nombre, precio), false);
   // buttonProduct.addEventListener("click", pregunta, false);
   buttonProduct.innerHTML = "Comprar";
   articulo.appendChild(buttonProduct);
   
+}
+
+function chargeArguments (){
+  for (let i = 0; i < productos.length; i++) {
+    // Acceder al nombre del producto actual y agregarlo al nuevo array
+    argumentsArray.push(productos[i].nombre);
+  }
 }
 
 
@@ -126,42 +136,50 @@ function mostrarLista() {
   catalogo.appendChild(articulo);
   contenedorCatalogo.append(catalogo);
   });
-  
 
 }
 
 
-function buy (nombre, precio) {
- 
-  // let cantidad = 0;
-  // let totalProducto = precio * cantidad;
-  let index = productos.nombre.indexOf(`'${nombre}'`) //RESOLVER indexOf
-  let productBuyed = productos[index];
-
-() => {let askIncludes = productsCart.nombre.includes(nombre)
-  if(!askIncludes) {
-productsCart.push(product)
-  }else if (askIncludes){
-    productBuyed.cantidad = cantidad++
-  }else{
-    shopping.innerHTML = `<h3>ERROR</h3>`;
+function buy(nombre, precio) {
+  console.log(nombre);
+  
+  // Encuentra el índice del producto con el nombre especificado
+  let index1 = productos.findIndex(producto => producto.nombre === nombre);
+  
+  // Si el producto existe en el array
+  if (index1 !== -1) {
+    let productBuyed = productos[index1];
+    
+    // Verifica si el producto ya está en el carrito
+    let askIncludes = productsCart.some(product => product.nombre === nombre);
+    
+    if (!askIncludes) {
+      // Agrega el producto al carrito
+      productsCart.push(new Product(nombre, precio));
+    } else {
+      // Incrementa la cantidad del producto en el carrito
+      let cartProductIndex = productsCart.findIndex(product => product.nombre === nombre);
+      productsCart[cartProductIndex].cantidad++;
+    }
+  } else {
+    // Muestra un error si el producto no se encuentra
+    shopping.innerHTML = `<h3>ERROR: Producto no encontrado</h3>`;
   }
 
-class product {
+  // Agrega la visualización del producto en el carrito
+  const tituloProducto = document.createElement('div');
+  tituloProducto.innerHTML = `<h3> ${nombre}</h3><h4> ${precio}</h4>`;
+  productoCart.appendChild(tituloProducto);
+  
+  console.log(productsCart);
+}
+
+class Product {
   constructor(nombre, precio) {
     this.nombre = nombre;
     this.precio = precio;
     this.cantidad = 1;
   }
-}}
-
-
-const tituloProducto = document.createElement('div');
-tituloProducto.innerHTML = `<h3> ${nombre}</h3>
-<h4> ${precio}</h4>`;
-         // 
-productoCart.appendChild(tituloProducto);
-console.log(productsCart)
 }
 
 
