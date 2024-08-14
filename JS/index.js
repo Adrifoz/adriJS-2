@@ -50,14 +50,15 @@ shopping.className = 'shopping';
 shopping.innerHTML = `<h3> Su carrito de compra </h3>`;
 container.appendChild(shopping);
 
-const cart = document.createElement('div');
-cart.className = 'cart';
-cart.innerHTML = `<h3> articulo </h3>`;
-shopping.appendChild(cart);
+// const cart = document.createElement('div');
+// cart.className = 'cart';
+// cart.innerHTML = `<h3> articulo </h3>`;
+// shopping.appendChild(cart);
 
 const productoCart = document.createElement('div');
 productoCart.className = 'productoCart';
-cart.appendChild(productoCart);
+shopping.appendChild(productoCart);
+buttonClear();
 
   //------------------------------------------------
 ////////////////////////////////////////////////////
@@ -87,6 +88,15 @@ function buttonProduct (articulo, nombre, precio) {
   // buttonProduct.addEventListener("click", pregunta, false);
   buttonProduct.innerHTML = "Comprar";
   articulo.appendChild(buttonProduct);
+  
+}
+
+function buttonClear () {
+  const buttonClear = document.createElement('button');
+  buttonClear.addEventListener("click", clear, false);
+  // buttonProduct.addEventListener("click", pregunta, false);
+  buttonClear.innerHTML = "Clear";
+  shopping.appendChild(buttonClear);
   
 }
 
@@ -139,9 +149,19 @@ function buy (nombre, precio) {
 
 
 const tituloProducto = document.createElement('div');
+tituloProducto.className = 'item';
 tituloProducto.innerHTML = `<h3> ${nombre}</h3>
-<h4> ${precio}</h4>`;         // 
+                          <h4> ${precio}</h4>`;         //
 productoCart.appendChild(tituloProducto);
+}
+
+function clear (){
+  let productsClear = document.querySelector('.productoCart');
+console.log(productoCart)
+productsClear.remove();
+buttonClear.remove();
+console.log("clear: " + productoCart)
+
 }
 
 
