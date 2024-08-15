@@ -7,9 +7,9 @@
 const productos = [
 {nombre: "Caño de agua termofusión", precio: 2000},
 {nombre: "Caño de gas termofusión", precio: 4000},
-{nombre: "Caño epoxi", precio: 1500},
-{nombre: "Caño corrugado", precio: 800},
-{nombre: "Manguera", precio: 500},
+{nombre: "Caño para gas epoxi ", precio: 1500},
+{nombre: "Caño corrugado para electricidad", precio: 800},
+{nombre: "Manguera para electricidad", precio: 500},
 ]
 
 
