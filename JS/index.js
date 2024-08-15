@@ -12,7 +12,7 @@ const productos = [
 {nombre: "Manguera", precio: 500},
 ]
 
-const productsCart = [];
+
 
 ////////////////////////////////////////////////////
 
@@ -21,6 +21,10 @@ const productsCart = [];
 // DECLARADOS
 
 let flag = false;
+
+const productoCart = document.createElement('div');
+
+let total = 0;
 
 
 ////////////////////////////////////////////////////
@@ -55,17 +59,35 @@ container.appendChild(shopping);
 // cart.innerHTML = `<h3> articulo </h3>`;
 // shopping.appendChild(cart);
 
-const productoCart = document.createElement('div');
-productoCart.className = 'productoCart';
-shopping.appendChild(productoCart);
+
+
+functionProductoCart()
+
+const productoCartSelected = document.querySelector('.productoCart');
+
+const totalPago = document.createElement('div');  // TERMINAR DE COLOCAR CANTIDAD
+totalPago.className = 'shopping';
+renderTotal();
+shopping.appendChild(totalPago);
+
 buttonClear();
 
   //------------------------------------------------
 ////////////////////////////////////////////////////
 
-
 ///////////
 //FUNCIONES
+
+function renderTotal(){
+  totalPago.innerHTML = `<h3> Total a pagar: ${total} </h3>`;
+}
+
+function functionProductoCart(){
+  shopping.appendChild(productoCart);
+
+productoCart.className = 'productoCart';
+}
+
 function button () {
   const button = document.createElement('button');
   button.addEventListener("click", pregunta, false);
@@ -93,6 +115,7 @@ function buttonProduct (articulo, nombre, precio) {
 
 function buttonClear () {
   const buttonClear = document.createElement('button');
+  buttonClear.className = 'buttonClear'
   buttonClear.addEventListener("click", clear, false);
   // buttonProduct.addEventListener("click", pregunta, false);
   buttonClear.innerHTML = "Clear";
@@ -142,26 +165,32 @@ function mostrarLista() {
 
 
 function buy (nombre, precio) {
- 
-  // let cantidad = 0;
-  // let totalProducto = precio * cantidad;
 
-
+total += precio;
 
 const tituloProducto = document.createElement('div');
 tituloProducto.className = 'item';
 tituloProducto.innerHTML = `<h3> ${nombre}</h3>
-                          <h4> ${precio}</h4>`;         //
+                          <h4> ${precio}</h4>`;
 productoCart.appendChild(tituloProducto);
+console.log(total)
+renderTotal();
 }
 
-function clear (){
-  let productsClear = document.querySelector('.productoCart');
-console.log(productoCart)
-productsClear.remove();
-buttonClear.remove();
-console.log("clear: " + productoCart)
+function clear() {
 
+  while (productoCart.firstChild) {
+    productoCart.removeChild(productoCart.firstChild);
+  }
+
+  let buttonClearSelector = document.querySelector('.buttonClear');
+  if (buttonClearSelector) {
+    buttonClearSelector.remove();
+  }
+
+  total = 0;
+  renderTotal();
+  buttonClear();
 }
 
 
