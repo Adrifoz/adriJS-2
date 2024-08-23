@@ -10,7 +10,7 @@ const productos = [
 {nombre: "Manguera", precio: 500, cantidad: 0},
 ]
 
-const productsCart = [];
+let productsCart = [];
 let isCatalogVisible = false;
 let total = 0;
 
@@ -119,11 +119,11 @@ const addToCart = (index) => {
     productsCart.push({ ...selectedProduct, cantidad: 1 });
   }
 
-  let totalProduct = cartProduct.precio;
-  total += totalProduct;
-  updateTotalRender ()
-
   updateCart();
+  
+  total += selectedProduct.precio;
+  updateTotalRender();
+
 };
 
 // Función para actualizar la visualización del carrito
@@ -140,9 +140,8 @@ const updateCart = () => {
 };
 
 function clearCart (){
-for (let i = 0; i < productsCart.length; i++) {
-  productsCart.pop();
-}
+  productsCart.length = 0;
+
 productCartRender.innerHTML = ''; // Limpiar el carrito
 
 total = 0;
@@ -166,6 +165,8 @@ Swal.fire({
       text: "Gracias por su compra.",
       icon: "success"
     });
+    total = 0;
+    updateTotalRender();
   }
 });
 }
