@@ -3,16 +3,49 @@
 // ASSETS
 
 const productos = [
-{nombre: "Caño de agua termofusión", precio: 2000, cantidad: 0},
-{nombre: "Caño de gas termofusión", precio: 4000, cantidad: 0},
-{nombre: "Caño epoxi", precio: 1500, cantidad: 0},
-{nombre: "Caño corrugado", precio: 800, cantidad: 0},
-{nombre: "Manguera", precio: 500, cantidad: 0},
+{nombre: "Caño de agua termofusión", precio: 2000, cantidad: 1},
+{nombre: "Caño de gas termofusión", precio: 4000, cantidad: 1},
+{nombre: "Caño epoxi", precio: 1500, cantidad: 1},
+{nombre: "Caño corrugado", precio: 800, cantidad: 1},
+{nombre: "Manguera", precio: 500, cantidad: 1},
 ]
 
+
 let productsCart = [];
+localStorage.setItem('cart', JSON.stringify(productsCart));
+
+
+
 let isCatalogVisible = false;
+
 let total = 0;
+
+//localStorage
+function saveCart(producto) {
+
+  cart.push(producto);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+const getCart = () => {
+  return JSON.parse(localStorage.getItem('cart')) || [];
+};
+
+let cart = getCart();
+
+function removeCart(){
+  localStorage.removeItem('cart');
+}
+
+function saveQuantityProd(product) {
+  
+  cart.forEach(item => {
+      if (item.nombre === product.nombre) {
+          item.cantidad++;
+      }
+  });
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 // Contenedor principal
 const container = document.createElement('div');
@@ -111,12 +144,12 @@ const createBuyButton = (article, index) => {
 // Agregar un producto al carrito
 const addToCart = (index) => {
   const selectedProduct = productos[index];
-  const cartProduct = productsCart.find(product => product.nombre === selectedProduct.nombre);
+  const cartProduct = cart.find(product => product.nombre === selectedProduct.nombre);
 
   if (cartProduct) {
-    cartProduct.cantidad++;
+    saveQuantityProd(selectedProduct)
   } else {
-    productsCart.push({ ...selectedProduct, cantidad: 1 });
+    saveCart(selectedProduct);
   }
 
   updateCart();
@@ -129,7 +162,7 @@ const addToCart = (index) => {
 // Actualizar la visualización del carrito
 const updateCart = () => {
   productCartRender.innerHTML = ''; // Limpiar el carrito
-  productsCart.forEach(product => {
+  cart.forEach(product => {
     const cartItem = document.createElement('div');
     cartItem.innerHTML = `
       <h3>${product.nombre}</h3>
@@ -141,12 +174,13 @@ const updateCart = () => {
 
 // Limpieza del carrito
 function clearCart (){
-  productsCart.length = 0;
+  removeCart();
 
   productCartRender.innerHTML = ''; // Limpiar el carrito
 
   total = 0;
   updateTotalRender();
+  console.log(cart)
 }
 
 // Compra
