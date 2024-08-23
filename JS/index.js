@@ -167,8 +167,7 @@ Swal.fire({
       text: "Gracias por su compra.",
       icon: "success"
     });
-    total = 0;
-    updateTotalRender();
+    clearCart();
   }
 });
 }

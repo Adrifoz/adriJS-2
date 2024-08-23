@@ -1,0 +1,123 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+
+
+
+  .contenedorCatalogo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .catalogo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .intro {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .intro h1 {
+    font-size: 2.5em;
+    color: #333;
+  }
+  
+  .intro h3 {
+    font-size: 1.5em;
+    color: #555;
+  }
+  
+
+  .catalogo div {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+  }
+  
+  .catalogo div h3 {
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .catalogo div h4 {
+    font-size: 1em;
+    color: #888;
+  }
+  
+  .shopping {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+
+
+  
+  .productoCart {
+    margin-top: 10px;
+  }
+  
+  .productoCart .item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+  }
+  
+  .productoCart .item h3 {
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .productoCart .item h4 {
+    font-size: 1em;
+    color: #888;
+  }
+  
+
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .productos{
+    background-color: #333;
+    border-radius: 4%;
+    margin: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .buttonClear {
+    background-color: #dc3545;
+  }
+  
+  .buttonClear:hover {
+    background-color: #c82333;
+  }
