@@ -1,6 +1,4 @@
 
-//ELIMINAR ITEMS DEL CARRITO, USAR EL MISMO SISTEMA DE CREATE Y REMOVE, O USAR PUSH.
-
 /////////
 // ASSETS
 
@@ -14,6 +12,7 @@ const productos = [
 
 const productsCart = [];
 let isCatalogVisible = false;
+let total = 0;
 
 // Crear el contenedor principal
 const container = document.createElement('div');
@@ -29,27 +28,44 @@ intro.innerHTML = `
 container.appendChild(intro);
 
 // Crear el contenedor para el catálogo y carrito de compras
-const contenedorCatalogo = document.createElement('div');
-contenedorCatalogo.className = 'contenedorCatalogo';
-container.appendChild(contenedorCatalogo);
+const containerCatalog = document.createElement('div');
+containerCatalog.className = 'contenedorCatalogo';
+container.appendChild(containerCatalog);
 
 const shopping = document.createElement('div');
 shopping.className = 'shopping';
 shopping.innerHTML = `<h3>Su carrito de compra</h3>`;
 container.appendChild(shopping);
 
-const productoCart = document.createElement('div');
-productoCart.className = 'productoCart';
-shopping.appendChild(productoCart);
+const productCartRender = document.createElement('div');
+productCartRender.className = 'productCartRender';
+shopping.appendChild(productCartRender);
+
+const totalRender = document.createElement('div');
+totalRender.className = 'total';
+totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
+shopping.appendChild(totalRender);
 
 // Función para crear el botón de catálogo
 const createCatalogButton = () => {
   const catalogButton = document.createElement('button');
   catalogButton.innerHTML = "Catálogo";
   catalogButton.className = "productos";
-  catalogButton.addEventListener("click", toggleCatalog);
-  container.appendChild(catalogButton);
+  catalogButton.addEventListener("click", toggleCatalog, false);
+  containerCatalog.appendChild(catalogButton);
 };
+
+// Botones para la sección de compra
+const clearButton = document.createElement('button');
+clearButton.innerHTML = "Limpiar carrito";
+clearButton.addEventListener("click", () => clearCart());
+shopping.appendChild(clearButton);
+
+const cartBuyButton = document.createElement('button');
+cartBuyButton.innerHTML = "Comprar";
+cartBuyButton.addEventListener("click", () => cartBuy());
+shopping.appendChild(cartBuyButton);
+
 
 // Función para alternar la visualización del catálogo
 const toggleCatalog = () => {
@@ -60,36 +76,36 @@ const toggleCatalog = () => {
 const showCatalog = () => {
   isCatalogVisible = true;
 
-  const catalogo = document.createElement('div');
-  catalogo.className = 'catalogo';
+  const catalog = document.createElement('div');
+  catalog.className = 'catalog';
   
   productos.forEach((producto, index) => {
-    const articulo = document.createElement('div');
-    articulo.innerHTML = `
+    const article = document.createElement('div');
+    article.innerHTML = `
       <h3>${producto.nombre}</h3>
       <h4>${producto.precio}</h4>`;
-    createBuyButton(articulo, index);
-    catalogo.appendChild(articulo);
+    createBuyButton(article, index);
+    catalog.appendChild(article);
   });
 
-  contenedorCatalogo.append(catalogo);
+  containerCatalog.append(catalog);
 };
 
 // Función para ocultar el catálogo
 const hideCatalog = () => {
-  const catalogo = document.querySelector(".catalogo");
-  if (catalogo) {
-    catalogo.remove();
+  const catalog = document.querySelector(".catalog");
+  if (catalog) {
+    catalog.remove();
     isCatalogVisible = false;
   }
 };
 
 // Función para crear el botón de compra para cada producto
-const createBuyButton = (articulo, index) => {
+const createBuyButton = (article, index) => {
   const buyButton = document.createElement('button');
   buyButton.innerHTML = "Comprar";
   buyButton.addEventListener("click", () => addToCart(index));
-  articulo.appendChild(buyButton);
+  article.appendChild(buyButton);
 };
 
 // Función para agregar un producto al carrito
@@ -103,21 +119,63 @@ const addToCart = (index) => {
     productsCart.push({ ...selectedProduct, cantidad: 1 });
   }
 
+  let totalProduct = cartProduct.precio;
+  total += totalProduct;
+  updateTotalRender ()
+
   updateCart();
 };
 
 // Función para actualizar la visualización del carrito
 const updateCart = () => {
-  productoCart.innerHTML = ''; // Limpiar el carrito
+  productCartRender.innerHTML = ''; // Limpiar el carrito
   productsCart.forEach(product => {
     const cartItem = document.createElement('div');
     cartItem.innerHTML = `
       <h3>${product.nombre}</h3>
       <h4>${product.precio}</h4>
       <h4>Cantidad: ${product.cantidad}</h4>`;
-    productoCart.appendChild(cartItem);
+      productCartRender.appendChild(cartItem);
   });
 };
+
+function clearCart (){
+for (let i = 0; i < productsCart.length; i++) {
+  productsCart.pop();
+}
+productCartRender.innerHTML = ''; // Limpiar el carrito
+
+total = 0;
+updateTotalRender();
+}
+
+function cartBuy (){
+Swal.fire({
+  title: "¿Quiere confirmar su compra?",
+  text: "Total",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "green",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Comprar",
+  cancelButtonText: "Cancelar"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: "¡Compra realizada con éxito!",
+      text: "Gracias por su compra.",
+      icon: "success"
+    });
+  }
+});
+}
+
+function updateTotalRender (){
+
+  totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
+
+}
+
 createCatalogButton();
 
 
