@@ -12,7 +12,7 @@ const productos = [
 
 
 let productsCart = [];
-localStorage.setItem('cart', JSON.stringify(productsCart));
+createCart();
 
 
 
@@ -21,6 +21,10 @@ let isCatalogVisible = false;
 let total = 0;
 
 //localStorage
+function createCart(){
+  localStorage.setItem('cart', JSON.stringify(productsCart));
+}
+
 function saveCart(producto) {
 
   cart.push(producto);
@@ -35,6 +39,8 @@ let cart = getCart();
 
 function removeCart(){
   localStorage.removeItem('cart');
+  createCart();
+
 }
 
 function saveQuantityProd(product) {
@@ -175,7 +181,7 @@ const updateCart = () => {
 // Limpieza del carrito
 function clearCart (){
   removeCart();
-
+  cart = [];
   productCartRender.innerHTML = ''; // Limpiar el carrito
 
   total = 0;
