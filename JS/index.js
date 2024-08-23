@@ -14,12 +14,12 @@ let productsCart = [];
 let isCatalogVisible = false;
 let total = 0;
 
-// Crear el contenedor principal
+// Contenedor principal
 const container = document.createElement('div');
 container.className = 'container';
 document.body.appendChild(container);
 
-// Crear la introducción
+// Introducción
 const intro = document.createElement('div');
 intro.className = 'intro';
 intro.innerHTML = `
@@ -27,7 +27,7 @@ intro.innerHTML = `
   <h3>Acceda al catálogo con stock</h3>`;
 container.appendChild(intro);
 
-// Crear el contenedor para el catálogo y carrito de compras
+// Contenedores hijos
 const containerCatalog = document.createElement('div');
 containerCatalog.className = 'contenedorCatalogo';
 container.appendChild(containerCatalog);
@@ -46,7 +46,7 @@ totalRender.className = 'total';
 totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
 shopping.appendChild(totalRender);
 
-// Función para crear el botón de catálogo
+// Botón de catálogo
 const createCatalogButton = () => {
   const catalogButton = document.createElement('button');
   catalogButton.innerHTML = "Catálogo";
@@ -67,12 +67,12 @@ cartBuyButton.addEventListener("click", () => cartBuy());
 shopping.appendChild(cartBuyButton);
 
 
-// Función para alternar la visualización del catálogo
+// Visualización del catálogo
 const toggleCatalog = () => {
   isCatalogVisible ? hideCatalog() : showCatalog();
 };
 
-// Función para mostrar la lista de productos
+// Mostrar Catálogo
 const showCatalog = () => {
   isCatalogVisible = true;
 
@@ -91,7 +91,7 @@ const showCatalog = () => {
   containerCatalog.append(catalog);
 };
 
-// Función para ocultar el catálogo
+// Ocultar el catálogo
 const hideCatalog = () => {
   const catalog = document.querySelector(".catalog");
   if (catalog) {
@@ -100,7 +100,7 @@ const hideCatalog = () => {
   }
 };
 
-// Función para crear el botón de compra para cada producto
+// Botón de compra para cada producto
 const createBuyButton = (article, index) => {
   const buyButton = document.createElement('button');
   buyButton.innerHTML = "Comprar";
@@ -108,7 +108,7 @@ const createBuyButton = (article, index) => {
   article.appendChild(buyButton);
 };
 
-// Función para agregar un producto al carrito
+// Agregar un producto al carrito
 const addToCart = (index) => {
   const selectedProduct = productos[index];
   const cartProduct = productsCart.find(product => product.nombre === selectedProduct.nombre);
@@ -126,7 +126,7 @@ const addToCart = (index) => {
 
 };
 
-// Función para actualizar la visualización del carrito
+// Actualizar la visualización del carrito
 const updateCart = () => {
   productCartRender.innerHTML = ''; // Limpiar el carrito
   productsCart.forEach(product => {
@@ -139,15 +139,17 @@ const updateCart = () => {
   });
 };
 
+// Limpieza del carrito
 function clearCart (){
   productsCart.length = 0;
 
-productCartRender.innerHTML = ''; // Limpiar el carrito
+  productCartRender.innerHTML = ''; // Limpiar el carrito
 
-total = 0;
-updateTotalRender();
+  total = 0;
+  updateTotalRender();
 }
 
+// Compra
 function cartBuy (){
 Swal.fire({
   title: "¿Quiere confirmar su compra?",
@@ -171,6 +173,7 @@ Swal.fire({
 });
 }
 
+//Total
 function updateTotalRender (){
 
   totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
