@@ -14,13 +14,37 @@ const productos = [
 let productsCart = [];
 createCart();
 
-
-
 let isCatalogVisible = false;
 
-let total = 0;
 
-//localStorage
+//total en localStorage
+function createTotal(){
+  
+  localStorage.setItem('total', JSON.stringify(0));
+}
+
+function saveTotal(price) {
+  let helpTotal = getTotal();
+  let addition = helpTotal =+ price;
+  localStorage.setItem('total', JSON.stringify(addition));
+  updateTotalRender();
+}
+
+const getTotal = () => {
+  return JSON.parse(localStorage.getItem('total')) || 0;
+};
+
+function removeTotal(){
+  localStorage.removeItem('total');
+  total = 0;
+  createTotal();
+  updateTotalRender();
+}
+
+createTotal();
+let total = getTotal();
+
+//carrito en localStorage
 function createCart(){
   localStorage.setItem('cart', JSON.stringify(productsCart));
 }
@@ -160,9 +184,8 @@ const addToCart = (index) => {
 
   updateCart();
   
-  total += selectedProduct.precio;
-  updateTotalRender();
-
+  let price = selectedProduct.precio;
+  saveTotal(price);
 };
 
 // Actualizar la visualización del carrito
@@ -185,8 +208,9 @@ function clearCart (){
   productCartRender.innerHTML = ''; // Limpiar el carrito
 
   total = 0;
+  removeTotal();
   updateTotalRender();
-  console.log(cart)
+  console.log(total)
 }
 
 // Compra
@@ -208,12 +232,13 @@ Swal.fire({
       icon: "success"
     });
     clearCart();
+
   }
 });
 }
 
 //Total
-function updateTotalRender (){
+function updateTotalRender(){
 
   totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
 

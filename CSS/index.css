@@ -5,6 +5,7 @@
     background-color: #f4f4f4;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
   }
   
 
@@ -12,13 +13,14 @@
 
   .contenedorCatalogo {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+
     gap: 20px;
     justify-content: center;
     margin-bottom: 20px;
   }
   
-  .catalogo {
+  .catalog {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -41,7 +43,7 @@
   }
   
 
-  .catalogo div {
+  .catalog div {
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -50,12 +52,12 @@
     width: 150px;
   }
   
-  .catalogo div h3 {
+  .catalog div h3 {
     font-size: 1.2em;
     color: #333;
   }
   
-  .catalogo div h4 {
+  .catalog div h4 {
     font-size: 1em;
     color: #888;
   }
@@ -72,23 +74,23 @@
 
 
   
-  .productoCart {
+  .productCart {
     margin-top: 10px;
   }
   
-  .productoCart .item {
+  .productCart .item {
     margin-bottom: 10px;
     padding: 10px;
     background-color: #eee;
     border-radius: 5px;
   }
   
-  .productoCart .item h3 {
+  .productCart .item h3 {
     font-size: 1.2em;
     color: #333;
   }
   
-  .productoCart .item h4 {
+  .productCart .item h4 {
     font-size: 1em;
     color: #888;
   }
