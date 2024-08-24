@@ -14,11 +14,10 @@ const productos = [
 let productsCart = [];
 createCart();
 
-
-
 let isCatalogVisible = false;
 
 let total = 0;
+
 
 //localStorage
 function createCart(){
