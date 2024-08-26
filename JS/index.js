@@ -27,7 +27,7 @@ function createTotal(){
 
 function saveTotal(price) {
   let helpTotal = getTotal();
-  let addition = helpTotal =+ price;
+  let addition = helpTotal + price;
   localStorage.setItem('total', JSON.stringify(addition));
   updateTotalRender();
 }
@@ -127,6 +127,7 @@ clearButton.addEventListener("click", () => clearCart());
 shopping.appendChild(clearButton);
 
 const cartBuyButton = document.createElement('button');
+cartBuyButton.className = "buttonComprar";
 cartBuyButton.innerHTML = "Comprar";
 cartBuyButton.addEventListener("click", () => cartBuy());
 shopping.appendChild(cartBuyButton);
@@ -241,7 +242,7 @@ Swal.fire({
 
 //Total
 function updateTotalRender(){
-
+  total = getTotal();
   totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
 
 }

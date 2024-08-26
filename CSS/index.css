@@ -1,125 +1,140 @@
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-  }
-  
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
+.intro h1 {
+  color: #170a6e;
+  font-size: 2em;
+  margin-bottom: 10px;
+  text-align: center;
+}
 
+.intro h3 {
+  color: #34495e;
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  .contenedorCatalogo {
-    display: flex;
-    flex-direction: column;
+.contenedorCatalogo,
+.shopping {
+  margin-top: 20px;
 
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .catalog {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .intro {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .intro h1 {
-    font-size: 2.5em;
-    color: #333;
-  }
-  
-  .intro h3 {
-    font-size: 1.5em;
-    color: #555;
-  }
-  
+}
 
-  .catalog div {
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: center;
-    width: 150px;
-  }
-  
-  .catalog div h3 {
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  .catalog div h4 {
-    font-size: 1em;
-    color: #888;
-  }
-  
-  .shopping {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-top: 20px;
-  }
+h3, h4 {
+  margin: 0;
+}
 
+h3 {
+  font-size: 1.5em;
+  color: #2c3e50;
+}
 
-  
-  .productCart {
-    margin-top: 10px;
-  }
-  
-  .productCart .item {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #eee;
-    border-radius: 5px;
-  }
-  
-  .productCart .item h3 {
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  .productCart .item h4 {
-    font-size: 1em;
-    color: #888;
-  }
-  
+h4 {
+  font-size: 1.2em;
+  color: #328776;
+}
 
-  button {
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .productos{
-    background-color: #333;
-    border-radius: 4%;
-    margin: 10px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .buttonClear {
-    background-color: #dc3545;
-  }
-  
-  .buttonClear:hover {
-    background-color: #c82333;
-  }
+/* Catalog styles */
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.catalog div {
+  background-color: #a0d5e3;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.catalog h3 {
+  font-size: 1.1em;
+  color: #34495e;
+}
+
+.catalog h4 {
+  font-size: 1em;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.catalog button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.catalog button:hover {
+  background-color: #2980b9;
+}
+
+/* Shopping cart styles */
+.shopping h3 {
+  font-size: 1.5em;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.productCartRender div {
+  background-color: #cae1e7;
+  ;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.total {
+  font-size: 1.2em;
+  color: #137863;
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* Buttons styles */
+button {
+  background-color: #444abd;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2b82c0;
+}
+
+.buttonComprar{
+  font-size: 25px;
+  background-color: rgb(11, 215, 49);
+}
