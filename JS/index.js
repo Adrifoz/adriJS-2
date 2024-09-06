@@ -1,3 +1,5 @@
+//ESTA RAMA (PUSH) TIENE EL TOTAL EN LOCALSTORAGE, SOLO FALTA RESETEAR COMPRETAMENTE LA CANTIDAD DE PRODUCTOS DEL CART.
+
 
 /////////
 // ASSETS
@@ -16,10 +18,35 @@ createCart();
 
 let isCatalogVisible = false;
 
-let total = 0;
 
+//total en localStorage
+function createTotal(){
+  
+  localStorage.setItem('total', JSON.stringify(0));
+}
 
-//localStorage
+function saveTotal(price) {
+  let helpTotal = getTotal();
+  let addition = helpTotal + price;
+  localStorage.setItem('total', JSON.stringify(addition));
+  updateTotalRender();
+}
+
+const getTotal = () => {
+  return JSON.parse(localStorage.getItem('total')) || 0;
+};
+
+function removeTotal(){
+  localStorage.removeItem('total');
+  total = 0;
+  createTotal();
+  updateTotalRender();
+}
+
+createTotal();
+let total = getTotal();
+
+//carrito en localStorage
 function createCart(){
   localStorage.setItem('cart', JSON.stringify(productsCart));
 }
@@ -100,6 +127,7 @@ clearButton.addEventListener("click", () => clearCart());
 shopping.appendChild(clearButton);
 
 const cartBuyButton = document.createElement('button');
+cartBuyButton.className = "buttonComprar";
 cartBuyButton.innerHTML = "Comprar";
 cartBuyButton.addEventListener("click", () => cartBuy());
 shopping.appendChild(cartBuyButton);
@@ -159,9 +187,8 @@ const addToCart = (index) => {
 
   updateCart();
   
-  total += selectedProduct.precio;
-  updateTotalRender();
-
+  let price = selectedProduct.precio;
+  saveTotal(price);
 };
 
 // Actualizar la visualización del carrito
@@ -184,8 +211,9 @@ function clearCart (){
   productCartRender.innerHTML = ''; // Limpiar el carrito
 
   total = 0;
+  removeTotal();
   updateTotalRender();
-  console.log(cart)
+  console.log(total)
 }
 
 // Compra
@@ -207,13 +235,14 @@ Swal.fire({
       icon: "success"
     });
     clearCart();
+
   }
 });
 }
 
 //Total
-function updateTotalRender (){
-
+function updateTotalRender(){
+  total = getTotal();
   totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
 
 }
