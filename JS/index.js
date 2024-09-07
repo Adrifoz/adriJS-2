@@ -140,8 +140,10 @@ const showCatalog = () => {
     const article = document.createElement('div');
     article.innerHTML = `
       <h3>${producto.nombre}</h3>
-      <img src="${producto.imagen}" alt="${producto.nombre}" />
-      <h4>${producto.precio}</h4>`;
+      <div class="contImg">
+        <img src="${producto.imagen}" alt="${producto.nombre}" />
+      </div>
+      <h4>Precio: ${producto.precio}</h4>`;
     createBuyButton(article, index);
     catalog.appendChild(article);
   });
