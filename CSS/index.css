@@ -91,6 +91,14 @@ h4 {
   transition: background-color 0.3s;
 }
 
+.catalog img {
+  padding-bottom: 30px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
 .catalog button:hover {
   background-color: #2980b9;
 }
