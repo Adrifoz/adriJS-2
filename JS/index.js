@@ -1,22 +1,13 @@
-//ESTA RAMA (PUSH) TIENE EL TOTAL EN LOCALSTORAGE, SOLO FALTA RESETEAR COMPRETAMENTE LA CANTIDAD DE PRODUCTOS DEL CART.
-
+import { productos } from "../ASSETS/productos.js";
 
 /////////
 // ASSETS
-
-const productos = [
-{nombre: "Caño de agua termofusión", precio: 2000, cantidad: 1},
-{nombre: "Caño de gas termofusión", precio: 4000, cantidad: 1},
-{nombre: "Caño epoxi", precio: 1500, cantidad: 1},
-{nombre: "Caño corrugado", precio: 800, cantidad: 1},
-{nombre: "Manguera", precio: 500, cantidad: 1},
-]
-
 
 let productsCart = [];
 createCart();
 
 let isCatalogVisible = false;
+
 
 
 //total en localStorage
@@ -149,7 +140,10 @@ const showCatalog = () => {
     const article = document.createElement('div');
     article.innerHTML = `
       <h3>${producto.nombre}</h3>
-      <h4>${producto.precio}</h4>`;
+      <div class="contImg">
+        <img src="${producto.imagen}" alt="${producto.nombre}" />
+      </div>
+      <h4>Precio: ${producto.precio}</h4>`;
     createBuyButton(article, index);
     catalog.appendChild(article);
   });
@@ -217,7 +211,8 @@ function clearCart (){
 }
 
 // Compra
-function cartBuy (){
+async function cartBuy (){
+  try {
 Swal.fire({
   title: "¿Quiere confirmar su compra?",
   text: "Total",
@@ -238,6 +233,9 @@ Swal.fire({
 
   }
 });
+} catch (error) {
+  console.error('Error al cargar el Boton de SweetAlert', error);
+}
 }
 
 //Total
