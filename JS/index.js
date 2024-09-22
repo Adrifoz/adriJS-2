@@ -176,7 +176,6 @@ const showCatalog = async () => {
 
 const renderCards = (catalog) => {
   productos.forEach((producto, index) => {
-    console.log(producto)
     const article = document.createElement('div');
     article.innerHTML = `
       <h3>${producto.nombre}</h3>
@@ -250,7 +249,6 @@ function clearCart (){
 
 // Compra
 function cartBuy (){
-  try {
 Swal.fire({
   title: "¿Quiere confirmar su compra?",
   text: "Total",
@@ -271,9 +269,6 @@ Swal.fire({
 
   }
 });
-} catch (error) {
-  console.error('Error al cargar el Boton de SweetAlert', error);
-}
 }
 
 //Total
