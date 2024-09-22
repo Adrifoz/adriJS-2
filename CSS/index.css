@@ -7,20 +7,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
   
 }
 
 .container {
+
+  max-width: 800px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  width: 100%;
-  padding: 20px;
   box-sizing: border-box;
   
 }
+
 
 .intro h1 {
   color: #170a6e;
@@ -39,6 +42,7 @@ body {
 .contenedorCatalogo,
 .shopping {
   margin-top: 20px;
+  height: auto;
 
 }
 
@@ -94,7 +98,6 @@ gap: 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  direction: ;
   transition: background-color 0.3s;
 }
 .contImg{
@@ -131,7 +134,7 @@ gap: 20px;
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
 }
 
 .total {

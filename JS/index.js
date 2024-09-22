@@ -1,7 +1,8 @@
-import { productos } from "../ASSETS/productos.js";
 
 /////////
 // ASSETS
+
+let productos = [];
 
 let productsCart = [];
 createCart();
@@ -9,6 +10,24 @@ createCart();
 let isCatalogVisible = false;
 
 
+//Productos del .json
+const URL = "../ASSETS/productos.json";
+
+async function fetchJson (){
+    await fetch(URL)
+    .then(res => res.json())
+    .then(data => {
+      productos = data;
+    })
+    
+}
+  
+
+//Renderizado de error en el DOM
+
+function renderError (){
+  containerCatalog.innerHTML = `<h3>Hubo un error al exhibir los productos, por favor recargue la página y disculpe las molestias</h3>`; 
+}
 
 //total en localStorage
 function createTotal(){
@@ -103,7 +122,7 @@ totalRender.innerHTML = `<h3>Total: $ ${total}</h3>`;
 shopping.appendChild(totalRender);
 
 // Botón de catálogo
-const createCatalogButton = () => {
+const createCatalogButton = async () => {
   const catalogButton = document.createElement('button');
   catalogButton.innerHTML = "Catálogo";
   catalogButton.className = "productos";
@@ -125,18 +144,39 @@ shopping.appendChild(cartBuyButton);
 
 
 // Visualización del catálogo
-const toggleCatalog = () => {
-  isCatalogVisible ? hideCatalog() : showCatalog();
-};
+const toggleCatalog = async () => {
+  if(isCatalogVisible) {
+    hideCatalog();
+  } else {
+    await showCatalog();
+  }
+}
 
 // Mostrar Catálogo
-const showCatalog = () => {
+const showCatalog = async () => {
   isCatalogVisible = true;
 
   const catalog = document.createElement('div');
   catalog.className = 'catalog';
-  
+
+  try {
+    await fetchJson();
+  }
+  catch {
+    renderError();
+  }
+  finally {
+    renderCards(catalog);
+  }
+
+
+
+  containerCatalog.append(catalog);
+};
+
+const renderCards = (catalog) => {
   productos.forEach((producto, index) => {
+    console.log(producto)
     const article = document.createElement('div');
     article.innerHTML = `
       <h3>${producto.nombre}</h3>
@@ -147,9 +187,8 @@ const showCatalog = () => {
     createBuyButton(article, index);
     catalog.appendChild(article);
   });
+}
 
-  containerCatalog.append(catalog);
-};
 
 // Ocultar el catálogo
 const hideCatalog = () => {
@@ -207,11 +246,10 @@ function clearCart (){
   total = 0;
   removeTotal();
   updateTotalRender();
-  console.log(total)
 }
 
 // Compra
-async function cartBuy (){
+function cartBuy (){
   try {
 Swal.fire({
   title: "¿Quiere confirmar su compra?",
