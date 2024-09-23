@@ -261,6 +261,19 @@ Swal.fire({
 }).then((result) => {
   if (result.isConfirmed) {
     Swal.fire({
+      title: "Confirme sus datos personales, por favor",
+      text: "Roberto Carlos Souza, tarjeta de débito XX10",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "green",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    })
+  }
+}).then((resultConfirm) => {
+  if (resultConfirm.isConfirmed) {
+    Swal.fire({
       title: "¡Compra realizada con éxito!",
       text: "Gracias por su compra.",
       icon: "success"
