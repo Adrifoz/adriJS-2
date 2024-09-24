@@ -260,6 +260,7 @@ Swal.fire({
   cancelButtonText: "Cancelar"
 }).then((result) => {
   if (result.isConfirmed) {
+    clearCart();
     Swal.fire({
       title: "Confirme sus datos personales, por favor",
       text: "Roberto Carlos Souza, tarjeta de débito XX10",
@@ -278,10 +279,11 @@ Swal.fire({
       text: "Gracias por su compra.",
       icon: "success"
     });
-    clearCart();
+
 
   }
 });
+
 }
 
 //Total
