@@ -62,7 +62,7 @@ function createCart(){
 }
 
 function saveCart(producto) {
-
+  producto.cantidad  = 1;
   cart.push(producto);
   localStorage.setItem('cart', JSON.stringify(cart));
 }
