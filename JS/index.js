@@ -11,7 +11,7 @@ let isCatalogVisible = false;
 
 
 //Productos del .json
-const URL = "../ASSETS/productos.json";
+const URL = "/ASSETS/productos.json";
 
 async function fetchJson (){
     await fetch(URL)
